@@ -69,7 +69,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel2.setText("Already have an account ?");
 
         jButton2.setBackground(new java.awt.Color(130, 153, 229));
-        jButton2.setText("Login");
+        jButton2.setText("Log-In");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -200,6 +200,10 @@ public class RegisterPage extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        RegisterPage.this.dispose();
+        
+        LoginPage lPage = new LoginPage();
+        lPage.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
