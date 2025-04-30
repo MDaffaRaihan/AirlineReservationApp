@@ -69,12 +69,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="Btn_Registen" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="UserTxt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="rUserTxt" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -134,8 +134,8 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="NameTxt" max="32767" attributes="0"/>
-                              <Component id="EmailTxt" max="32767" attributes="0"/>
+                              <Component id="rNameTxt" max="32767" attributes="0"/>
+                              <Component id="rEmailTxt" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -151,17 +151,17 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="NameTxt" min="-2" max="-2" attributes="0"/>
+                  <Component id="rNameTxt" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="UserTxt" min="-2" max="-2" attributes="0"/>
+                  <Component id="rUserTxt" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="EmailTxt" min="-2" max="-2" attributes="0"/>
+                          <Component id="rEmailTxt" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -174,7 +174,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="Btn_Registen" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -193,13 +193,16 @@
             <Property name="text" type="java.lang.String" value="Register"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="Btn_Registen">
           <Properties>
             <Property name="text" type="java.lang.String" value="Register"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_RegistenActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -229,7 +232,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="RPassTxt">
         </Component>
-        <Component class="javax.swing.JTextField" name="UserTxt">
+        <Component class="javax.swing.JTextField" name="rUserTxt">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -241,7 +244,7 @@
             <Property name="text" type="java.lang.String" value="Email Address"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="EmailTxt">
+        <Component class="javax.swing.JTextField" name="rEmailTxt">
         </Component>
         <Component class="javax.swing.JPasswordField" name="RCPassTxt">
         </Component>
@@ -250,7 +253,7 @@
             <Property name="text" type="java.lang.String" value="Confirm Password"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="NameTxt">
+        <Component class="javax.swing.JTextField" name="rNameTxt">
         </Component>
       </SubComponents>
     </Container>

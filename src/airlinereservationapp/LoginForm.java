@@ -177,7 +177,7 @@ public class LoginForm extends javax.swing.JFrame {
         // untuk mengambil password dari textfield
         String Password = String.valueOf(PassTxt.getPassword());
         
-        User user = UserController.validateLogin(UserEmail, Password);
+        User user = UserController.validasiLogin(UserEmail, Password);
         
         if (user != null){
             LoginForm.this.dispose();

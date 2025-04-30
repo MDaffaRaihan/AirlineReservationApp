@@ -4,6 +4,10 @@
  */
 package airlinereservationapp;
 
+import Controller.Connector;
+import Controller.UserController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Reistein
@@ -29,19 +33,19 @@ public class RegisterForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Btn_Registen = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         RPassTxt = new javax.swing.JPasswordField();
-        UserTxt = new javax.swing.JTextField();
+        rUserTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        EmailTxt = new javax.swing.JTextField();
+        rEmailTxt = new javax.swing.JTextField();
         RCPassTxt = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
-        NameTxt = new javax.swing.JTextField();
+        rNameTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -62,8 +66,13 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Register");
 
-        jButton1.setText("Register");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Btn_Registen.setText("Register");
+        Btn_Registen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Btn_Registen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_RegistenActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Already have an account ?");
 
@@ -93,11 +102,11 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(Btn_Registen))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UserTxt)
+                            .addComponent(rUserTxt)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -138,8 +147,8 @@ public class RegisterForm extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NameTxt)
-                            .addComponent(EmailTxt))
+                            .addComponent(rNameTxt)
+                            .addComponent(rEmailTxt))
                         .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
@@ -150,17 +159,17 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(UserTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rUserTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(EmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,7 +179,7 @@ public class RegisterForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RCPassTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
-                .addComponent(jButton1)
+                .addComponent(Btn_Registen)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,6 +215,53 @@ public class RegisterForm extends javax.swing.JFrame {
         lPage.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void Btn_RegistenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_RegistenActionPerformed
+        // TODO add your handling code here:
+        
+        // untuk mengambil nama dari textfield
+        String Name = rNameTxt.getText();
+        
+        // untuk mengambil username dari textfield
+        String User = rUserTxt.getText();
+        
+        // untuk mengambil gmail dari textfield
+        String Email = rEmailTxt.getText();
+        
+        // untuk mengambil password dari textfield
+        String Password = String.valueOf(RPassTxt.getPassword());
+        
+        // untuk mengambil confirmation password dari textfield
+        String CPass = String.valueOf(RCPassTxt.getPassword());
+        
+        if(validasiInputUser(Name, User, Email, Password, CPass)){
+            if(UserController.register(Name, User, Email, Password)){
+                RegisterForm.this.dispose();
+
+                LoginForm lForm = new LoginForm();
+                lForm.setVisible(true);
+                
+                JOptionPane.showMessageDialog(RegisterForm.this, "Registrasi Berhasil");
+            } else {
+                JOptionPane.showMessageDialog(RegisterForm.this, "Username/Email sudah ada");
+                
+            }
+        } else {
+                JOptionPane.showMessageDialog(RegisterForm.this, "Password  harus sama");
+            
+        }
+    }//GEN-LAST:event_Btn_RegistenActionPerformed
+
+    private boolean validasiInputUser(String Name, String User, String Email, String Password, String CPass){
+        // semua teks field harus terisi
+        if(Name.length() == 0 || User.length() == 0 || Email.length() == 0 || Password.length() == 0 || CPass.length() == 0) return false;
+        
+        // password harus sama dengan cpass
+        if(!Password.equals(CPass)) return false;
+        
+        // tervalidasi
+        return true;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -245,12 +301,9 @@ public class RegisterForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField EmailTxt;
-    private javax.swing.JTextField NameTxt;
+    private javax.swing.JButton Btn_Registen;
     private javax.swing.JPasswordField RCPassTxt;
     private javax.swing.JPasswordField RPassTxt;
-    private javax.swing.JTextField UserTxt;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -261,5 +314,8 @@ public class RegisterForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField rEmailTxt;
+    private javax.swing.JTextField rNameTxt;
+    private javax.swing.JTextField rUserTxt;
     // End of variables declaration//GEN-END:variables
 }
