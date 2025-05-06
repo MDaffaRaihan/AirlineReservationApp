@@ -6,6 +6,10 @@ package airlinereservationapp;
 
 import Controller.Connector;
 import Controller.UserController;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -239,6 +243,23 @@ public class RegisterForm extends javax.swing.JFrame {
 
                 LoginForm lForm = new LoginForm();
                 lForm.setVisible(true);
+                
+                Connector Conn = new Connector();
+                Statement Data = Conn.getStatement();
+                
+                String query = (
+                        "CREATE TABLE riwayat_tiket_" + User +" ("
+                        + "No INT(8) AUTO_INCREMENT PRIMARY KEY,"
+                        + "Username VARCHAR(25),"
+                        + "Tgl_Pemesanan TIMESTAMP"
+                        + ")"
+                );
+                
+                try {
+                    Data.executeUpdate(query);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 JOptionPane.showMessageDialog(RegisterForm.this, "Registrasi Berhasil");
             } else {

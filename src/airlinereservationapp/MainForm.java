@@ -4,6 +4,9 @@
  */
 package airlinereservationapp;
 
+import Controller.MaskapaiController;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Reistein
@@ -15,10 +18,21 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+        
         Page_TikSay.setVisible(false);
         Page_Akun.setVisible(false);
+        
+        this.tampildata();
     }
 
+    public void tampildata() {
+        MaskapaiController mc = new MaskapaiController();
+        DefaultTableModel dtm = mc.createtable();
+        
+        this.tbl_pemesanan.setModel(dtm);
+        
+        mc.tampilkanPenerbangan();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,7 +217,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        Tujuan_Penerbangan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih Tujuan Anda --", "Juanda Airport", "Adi Sujipto Airport", "Kualanamu Airport", "Abdul Rachman Saleh Airport", "Minangkabau Airport", "Ngurah Rai Airport" }));
+        Tujuan_Penerbangan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih Tujuan Anda --", "Surabaya (Juanda Airport)", "Yogyakarta (Adi Sujipto Airport)", "Medan (Kualanamu Airport)", "Malang (Abdul Rachman Saleh Airport)", "Padang (Minangkabau Airport)", "Bali (Ngurah Rai Airport)" }));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Tujuan Penerbangan");
@@ -233,7 +247,15 @@ public class MainForm extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbl_pemesanan);
 
         jButton2.setText("Pesan Tiket");

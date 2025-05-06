@@ -4,7 +4,6 @@
  */
 package airlinereservationapp;
 
-import Controller.Connector;
 import Controller.UserController;
 import Model.User;
 import javax.swing.JOptionPane;

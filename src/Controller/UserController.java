@@ -13,7 +13,6 @@ import java.sql.*;
  */
 public class UserController {
 
-
     public static User validasiLogin(String UserEmail, String Password){
         Connector Conn = new Connector();
         Statement Data = Conn.getStatement();
