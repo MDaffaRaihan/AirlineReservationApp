@@ -5,6 +5,7 @@
 package airlinereservationapp;
 
 import Controller.MaskapaiController;
+import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -56,17 +57,17 @@ public class MainForm extends javax.swing.JFrame {
         Tujuan_Penerbangan = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        Tgl_Penerbangan = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        Maskapai_Penerbangan = new javax.swing.JComboBox<>();
+        Btn_Cari = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_pemesanan = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        Btn_Pesan = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         Page_TikSay = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_tiketsy = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         Page_Akun = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -225,17 +226,24 @@ public class MainForm extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Tanggal Penerbangan");
 
+        Tgl_Penerbangan.setDateFormatString("yyyy-MM-dd");
+
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Maskapai Penerbangan");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih Maskapai Penerbangan --", "CITILINK INDONESIA", "GARUDA INDONESIA", "BATIK AIR" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        Maskapai_Penerbangan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih Maskapai Penerbangan --", "CITILINK INDONESIA", "GARUDA INDONESIA", "BATIK AIR" }));
+        Maskapai_Penerbangan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                Maskapai_PenerbanganActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Cari");
+        Btn_Cari.setText("Cari");
+        Btn_Cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_CariActionPerformed(evt);
+            }
+        });
 
         tbl_pemesanan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -258,10 +266,10 @@ public class MainForm extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tbl_pemesanan);
 
-        jButton2.setText("Pesan Tiket");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Pesan.setText("Pesan Tiket");
+        Btn_Pesan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Btn_PesanActionPerformed(evt);
             }
         });
 
@@ -280,7 +288,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(Page_PemTikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Page_PemTikLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Btn_Pesan, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Page_PemTikLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addGroup(Page_PemTikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,14 +300,14 @@ public class MainForm extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(Page_PemTikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Tujuan_Penerbangan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox2, 0, 262, Short.MAX_VALUE))
+                                    .addComponent(Maskapai_Penerbangan, 0, 262, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                                 .addGroup(Page_PemTikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Page_PemTikLayout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(Tgl_Penerbangan, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Btn_Cari, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(50, 50, 50))
         );
         Page_PemTikLayout.setVerticalGroup(
@@ -311,21 +319,21 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(Page_PemTikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tgl_Penerbangan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Tujuan_Penerbangan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Page_PemTikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Maskapai_Penerbangan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_Pesan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_tiketsy.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -336,7 +344,7 @@ public class MainForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_tiketsy);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel9.setText("Tiket Saya");
@@ -506,17 +514,30 @@ public class MainForm extends javax.swing.JFrame {
         Page_Akun.setVisible(true);
     }//GEN-LAST:event_Tab_AkunMouseClicked
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void Maskapai_PenerbanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Maskapai_PenerbanganActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_Maskapai_PenerbanganActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Btn_PesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_PesanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Btn_PesanActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void Btn_CariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CariActionPerformed
+        // TODO add your handling code here:
+        String ftgl ="yyyy-MM-dd";
+        
+        SimpleDateFormat fm = new SimpleDateFormat(ftgl);
+        
+        String Tujuan = Tujuan_Penerbangan.getSelectedItem().toString();
+        String Maskapai = Maskapai_Penerbangan.getSelectedItem().toString();
+        String Tgl = String.valueOf(fm.format(Tgl_Penerbangan.getDate()));
+        
+        System.out.println(Tujuan + Maskapai + Tgl);
+    }//GEN-LAST:event_Btn_CariActionPerformed
 
     /**
      * @param args the command line arguments
@@ -554,17 +575,17 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Cari;
+    private javax.swing.JButton Btn_Pesan;
+    private javax.swing.JComboBox<String> Maskapai_Penerbangan;
     private javax.swing.JPanel Page_Akun;
     private javax.swing.JPanel Page_PemTik;
     private javax.swing.JPanel Page_TikSay;
     private javax.swing.JPanel Tab_Akun;
     private javax.swing.JPanel Tab_PemTik;
     private javax.swing.JPanel Tab_TikSay;
+    private com.toedter.calendar.JDateChooser Tgl_Penerbangan;
     private javax.swing.JComboBox<String> Tujuan_Penerbangan;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -585,10 +606,10 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTable tbl_pemesanan;
+    private javax.swing.JTable tbl_tiketsy;
     // End of variables declaration//GEN-END:variables
 }

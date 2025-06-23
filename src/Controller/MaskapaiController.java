@@ -67,4 +67,8 @@ public class MaskapaiController {
             System.out.println("Query Gagal");
         }
     }
+    
+    public void cariPenerbangan(){
+        
+    }
 }
