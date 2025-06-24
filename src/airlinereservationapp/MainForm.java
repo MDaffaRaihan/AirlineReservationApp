@@ -5,6 +5,7 @@
 package airlinereservationapp;
 
 import Controller.MaskapaiController;
+import Model.User;
 import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,8 +18,11 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
-    public MainForm() {
+    private User user;
+    
+    public MainForm(User user) {
         initComponents();
+        this.user = user;
         
         Page_TikSay.setVisible(false);
         Page_Akun.setVisible(false);
@@ -33,6 +37,10 @@ public class MainForm extends javax.swing.JFrame {
         this.tbl_pemesanan.setModel(dtm);
         
         mc.tampilkanPenerbangan();
+        
+        Txt_Name.setText(user.getName());
+        Txt_Uname.setText(user.getUsername());
+        Txt_Email.setText(user.getEmail());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +73,7 @@ public class MainForm extends javax.swing.JFrame {
         tbl_pemesanan = new javax.swing.JTable();
         Btn_Pesan = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
+        Btn_Reset = new javax.swing.JButton();
         Page_TikSay = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_tiketsy = new javax.swing.JTable();
@@ -74,11 +83,10 @@ public class MainForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        Txt_Name = new javax.swing.JTextField();
+        Txt_Uname = new javax.swing.JTextField();
+        Txt_Email = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -245,6 +253,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        tbl_pemesanan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tbl_pemesanan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -264,6 +273,7 @@ public class MainForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbl_pemesanan.setRowHeight(30);
         jScrollPane2.setViewportView(tbl_pemesanan);
 
         Btn_Pesan.setText("Pesan Tiket");
@@ -275,6 +285,13 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel15.setText("Pemesanan Tiket");
+
+        Btn_Reset.setText("Reset");
+        Btn_Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Page_PemTikLayout = new javax.swing.GroupLayout(Page_PemTik);
         Page_PemTik.setLayout(Page_PemTikLayout);
@@ -307,7 +324,10 @@ public class MainForm extends javax.swing.JFrame {
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(Tgl_Penerbangan, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Btn_Cari, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Page_PemTikLayout.createSequentialGroup()
+                                        .addComponent(Btn_Reset)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Btn_Cari, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(50, 50, 50))
         );
         Page_PemTikLayout.setVerticalGroup(
@@ -325,7 +345,8 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(Page_PemTikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(Maskapai_Penerbangan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Btn_Cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Btn_Reset))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -333,6 +354,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
         );
 
+        tbl_tiketsy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tbl_tiketsy.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -344,6 +366,7 @@ public class MainForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_tiketsy.setRowHeight(30);
         jScrollPane1.setViewportView(tbl_tiketsy);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -376,56 +399,57 @@ public class MainForm extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel10.setText("AKUN SAYA");
 
-        jLabel11.setText("Nama");
+        jLabel11.setText("Nama           :");
 
-        jLabel12.setText("Username");
+        jLabel12.setText("Username    :");
 
-        jLabel13.setText("Email");
+        jLabel13.setText("Email            :");
 
-        jLabel14.setText("Password");
-
-        jTextField1.setEditable(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Txt_Name.setEditable(false);
+        Txt_Name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                Txt_NameActionPerformed(evt);
             }
         });
 
-        jTextField2.setEditable(false);
+        Txt_Uname.setEditable(false);
 
-        jTextField3.setEditable(false);
+        Txt_Email.setEditable(false);
 
-        jPasswordField1.setEditable(false);
-        jPasswordField1.setText("jPasswordField1");
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setText("Keluar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Page_AkunLayout = new javax.swing.GroupLayout(Page_Akun);
         Page_Akun.setLayout(Page_AkunLayout);
         Page_AkunLayout.setHorizontalGroup(
             Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Page_AkunLayout.createSequentialGroup()
-                .addContainerGap(403, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(387, 387, 387))
             .addGroup(Page_AkunLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Page_AkunLayout.createSequentialGroup()
-                        .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))
-                        .addGap(28, 28, 28)
-                        .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Page_AkunLayout.createSequentialGroup()
-                        .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(28, 28, 28)
-                        .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addGap(28, 28, 28)
+                .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Txt_Name)
+                        .addComponent(Txt_Uname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Page_AkunLayout.createSequentialGroup()
+                .addContainerGap(403, Short.MAX_VALUE)
+                .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Page_AkunLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(387, 387, 387))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Page_AkunLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(34, 34, 34))))
         );
         Page_AkunLayout.setVerticalGroup(
             Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,20 +459,18 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                    .addComponent(Txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                    .addComponent(Txt_Uname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(Page_AkunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(350, Short.MAX_VALUE))
+                    .addComponent(Txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 409, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -508,6 +530,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void Tab_AkunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tab_AkunMouseClicked
         // TODO add your handling code here:
+        
         Page_PemTik.setVisible(false);
         tbl_pemesanan.setVisible(false);
         Page_TikSay.setVisible(false);
@@ -522,9 +545,9 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_PesanActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Txt_NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_NameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_Txt_NameActionPerformed
 
     private void Btn_CariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CariActionPerformed
         // TODO add your handling code here:
@@ -532,12 +555,70 @@ public class MainForm extends javax.swing.JFrame {
         
         SimpleDateFormat fm = new SimpleDateFormat(ftgl);
         
-        String Tujuan = Tujuan_Penerbangan.getSelectedItem().toString();
-        String Maskapai = Maskapai_Penerbangan.getSelectedItem().toString();
+        String TujuanSelect = Tujuan_Penerbangan.getSelectedItem().toString();
+        String MaskapaiSelect = Maskapai_Penerbangan.getSelectedItem().toString();
         String Tgl = String.valueOf(fm.format(Tgl_Penerbangan.getDate()));
         
-        System.out.println(Tujuan + Maskapai + Tgl);
+        String Tujuan = "";
+        if (TujuanSelect.equals("Surabaya (Juanda Airport)")){
+            Tujuan = "Juanda Airport";
+            
+        } else if (TujuanSelect.equals("Yogyakarta (Adi Sujipto Airport)")) {
+            Tujuan = "Adi Sujipto Airport";
+            
+        } else if (TujuanSelect.equals("Medan (Kualanamu Airport)")) {
+            Tujuan = "Kualanamu Airport";
+            
+        } else if (TujuanSelect.equals("Malang (Abdul Rachman Saleh Airport)")) {
+            Tujuan = "Abdul Rachman Saleh Airport";
+            
+        } else if (TujuanSelect.equals("Padang (Minangkabau Airport)")) {
+            Tujuan = "Minangkabau Airport";
+            
+        } else if (TujuanSelect.equals("Bali (Ngurah Rai Airport)")) {
+            Tujuan = "Ngurah Rai Airport";
+            
+        } else {
+            Tujuan = "";
+        }
+        
+        String Maskapai = "";
+        if (MaskapaiSelect.equals("-- Pilih Maskapai Penerbangan --")){
+            Maskapai = "";
+        } else {
+            Maskapai = MaskapaiSelect;
+        }
+        
+        try{
+            MaskapaiController mc = new MaskapaiController();
+            DefaultTableModel dtm = mc.createtable();
+        
+            this.tbl_pemesanan.setModel(dtm);
+        
+            //mc.tampilkanPenerbangan();
+            mc.cariTiket(Tujuan, Maskapai, Tgl);
+        } catch (Exception e) {
+            System.out.println(e + "\n Error filter");
+        }
     }//GEN-LAST:event_Btn_CariActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void Btn_ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ResetActionPerformed
+        // TODO add your handling code here:
+        Tujuan_Penerbangan.setSelectedIndex(0);
+        Maskapai_Penerbangan.setSelectedIndex(0);
+        Tgl_Penerbangan.setDate(null);
+        
+        MaskapaiController mc = new MaskapaiController();
+        DefaultTableModel dtm = mc.createtable();
+        
+        this.tbl_pemesanan.setModel(dtm);
+        
+        mc.tampilkanPenerbangan();
+    }//GEN-LAST:event_Btn_ResetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -569,7 +650,7 @@ public class MainForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainForm().setVisible(true);
+                
             }
         });
     }
@@ -577,6 +658,7 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Cari;
     private javax.swing.JButton Btn_Pesan;
+    private javax.swing.JButton Btn_Reset;
     private javax.swing.JComboBox<String> Maskapai_Penerbangan;
     private javax.swing.JPanel Page_Akun;
     private javax.swing.JPanel Page_PemTik;
@@ -586,12 +668,15 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel Tab_TikSay;
     private com.toedter.calendar.JDateChooser Tgl_Penerbangan;
     private javax.swing.JComboBox<String> Tujuan_Penerbangan;
+    private javax.swing.JTextField Txt_Email;
+    private javax.swing.JTextField Txt_Name;
+    private javax.swing.JTextField Txt_Uname;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -603,12 +688,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTable tbl_pemesanan;
     private javax.swing.JTable tbl_tiketsy;
     // End of variables declaration//GEN-END:variables

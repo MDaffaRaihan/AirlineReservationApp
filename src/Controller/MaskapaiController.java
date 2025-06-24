@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Filter;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
@@ -25,13 +26,13 @@ public class MaskapaiController {
     };
     
     public DefaultTableModel createtable() {
-        dtm.addColumn("No. Maskapai");
+        //dtm.addColumn("No. Maskapai");
         dtm.addColumn("Nama Maskapai");
         dtm.addColumn("Tujuan");
         dtm.addColumn("Tgl Berangkat");
         dtm.addColumn("Jam Berangkat");
         dtm.addColumn("Harga");
-        dtm.addColumn("No. Penerbangan");     
+        //dtm.addColumn("No. Penerbangan");     
         
         return this.dtm;
     }
@@ -51,15 +52,15 @@ public class MaskapaiController {
             
             //hasil query ditampilkan di dtm
             while(rSet.next()) {
-                Object[] obj = new Object[7];
+                Object[] obj = new Object[5];
                 //getString harus sesuai dengan kolom di db
-                obj[0] = rSet.getString("Idm");
-                obj[1] = rSet.getString("Maskapai");
-                obj[2] = rSet.getString("Tujuan");
-                obj[3] = rSet.getString("Tgl_Keberangkatan");
-                obj[4] = rSet.getString("Jam_Keberangkatan");
-                obj[5] = "Rp. "+rSet.getString("Harga");
-                obj[6] = rSet.getString("Nopen");
+                //obj[0] = rSet.getString("Idm");
+                obj[0] = rSet.getString("Maskapai");
+                obj[1] = rSet.getString("Tujuan");
+                obj[2] = rSet.getString("Tgl_Keberangkatan");
+                obj[3] = rSet.getString("Jam_Keberangkatan");
+                obj[4] = "Rp. "+rSet.getString("Harga");
+                //obj[6] = rSet.getString("Nopen");
                 
                 dtm.addRow(obj);
             }
@@ -68,7 +69,43 @@ public class MaskapaiController {
         }
     }
     
-    public void cariPenerbangan(){
+    public void cariTiket(String TPenerbangan, String MPenerbangan, String TglPenerbangan){
+        try {
+            Filter filt = new Filter();
+            
+            filt.setTPenerbangan(TPenerbangan);
+            filt.setMPenerbangan(MPenerbangan);
+            filt.setTglPenerbangan(TglPenerbangan);
+            
+            dtm.getDataVector().removeAllElements();
+            dtm.fireTableDataChanged();
+            
+            String query = "SELECT * FROM maskapai WHERE ('" + TPenerbangan + "' = '' OR Tujuan = '" + TPenerbangan + 
+                    "') AND ('" + MPenerbangan + "' = '' OR Maskapai = '" + MPenerbangan + "') AND Tgl_Keberangkatan >= '" + TglPenerbangan + "'";
+            ResultSet rSet = Data.executeQuery(query);
+            
+            while(rSet.next()) {
+                Object[] obj = new Object[5];
+                //getString harus sesuai dengan kolom di db
+                //obj[0] = rSet.getString("Idm");
+                obj[0] = rSet.getString("Maskapai");
+                obj[1] = rSet.getString("Tujuan");
+                obj[2] = rSet.getString("Tgl_Keberangkatan");
+                obj[3] = rSet.getString("Jam_Keberangkatan");
+                obj[4] = "Rp. "+rSet.getString("Harga");
+                //obj[6] = rSet.getString("Nopen");
+                
+                dtm.addRow(obj);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         
     }
+    
+    public void pesanTiket(String MPenerbangan, String TPenerbangan, String TglPenerbangan, String JamPenerbangan) {
+        
+    }
+    
+    
 }

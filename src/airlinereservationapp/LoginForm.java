@@ -181,7 +181,7 @@ public class LoginForm extends javax.swing.JFrame {
         if (user != null){
             LoginForm.this.dispose();
             
-            MainForm mForm = new MainForm();
+            MainForm mForm = new MainForm(user);
             mForm.setVisible(true);
             
         } else {

@@ -19,19 +19,23 @@ public class UserController {
         
         try {
         String lquery = (
-                "SELECT * FROM user WHERE Username = '" + UserEmail + "' OR Email = '" + UserEmail + "' AND Password = '"+ Password + "'");
+                "SELECT * FROM user WHERE (Username = '" + UserEmail + "' OR Email = '" + UserEmail + "') AND Password = '"+ Password + "'");
         
         ResultSet rSet = Data.executeQuery(lquery);
             if(rSet.next()){
                 int Uid = rSet.getInt("Idu");
+                String Username = rSet.getString("Username");
+                String Name = rSet.getString("Nama");
+                String Email = rSet.getString("Email");
 
-                return new User(Uid, UserEmail, Password);
+                return new User(Uid, UserEmail, Password, Username, Name, Email);
             }
+            
         } catch (SQLException ex) {
             System.out.println("sqlexep"+ex);
         }
+            return null;
         
-        return null;  
     }
     
     public static boolean register(String Nama, String User, String Email, String Password){
