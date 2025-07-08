@@ -38,12 +38,12 @@ public class MaskapaiController {
         dtm.addColumn("Tgl Berangkat");
         dtm.addColumn("Jam Berangkat");
         dtm.addColumn("Harga");
-        dtm.addColumn("No. Penerbangan");     
+        //dtm.addColumn("No. Penerbangan");     
         
         return this.dtm;
     }
     public DefaultTableModel usercreatetable() {
-        udtm.addColumn("No. Maskapai");
+        //udtm.addColumn("No. Maskapai");
         udtm.addColumn("No. Penerbangan");     
         udtm.addColumn("Nama Maskapai");
         udtm.addColumn("Tujuan");
@@ -70,7 +70,7 @@ public class MaskapaiController {
             
             //hasil query ditampilkan di dtm
             while(rSet.next()) {
-                Object[] obj = new Object[7];
+                Object[] obj = new Object[6];
                 //getString harus sesuai dengan kolom di db
                 obj[0] = rSet.getString("Idm");
                 obj[1] = rSet.getString("Maskapai");
@@ -78,7 +78,7 @@ public class MaskapaiController {
                 obj[3] = rSet.getString("Tgl_Keberangkatan");
                 obj[4] = rSet.getString("Jam_Keberangkatan");
                 obj[5] = "Rp. "+rSet.getString("Harga");
-                obj[6] = rSet.getString("Nopen");
+                //obj[6] = rSet.getString("Nopen");
                 
                 dtm.addRow(obj);
             }
@@ -103,7 +103,7 @@ public class MaskapaiController {
             ResultSet rSet = Data.executeQuery(query);
             
             while(rSet.next()) {
-                Object[] obj = new Object[7];
+                Object[] obj = new Object[6];
                 //getString harus sesuai dengan kolom di db
                 obj[0] = rSet.getString("Idm");
                 obj[1] = rSet.getString("Maskapai");
@@ -111,7 +111,7 @@ public class MaskapaiController {
                 obj[3] = rSet.getString("Tgl_Keberangkatan");
                 obj[4] = rSet.getString("Jam_Keberangkatan");
                 obj[5] = "Rp. "+rSet.getString("Harga");
-                obj[6] = rSet.getString("Nopen");
+                //obj[6] = rSet.getString("Nopen");
                 
                 dtm.addRow(obj);
             }
@@ -158,16 +158,16 @@ public class MaskapaiController {
             
             //hasil query ditampilkan di dtm
             while(rSet.next()) {
-                Object[] objt = new Object[8];
+                Object[] objt = new Object[7];
                 //getString harus sesuai dengan kolom di db
-                objt[0] = rSet.getString("Idm");
+                //objt[0] = rSet.getString("Idm");
+                objt[0] = rSet.getString("Nopen");
                 objt[1] = rSet.getString("Maskapai");
                 objt[2] = rSet.getString("Tujuan");
                 objt[3] = rSet.getString("Tgl_Keberangkatan");
                 objt[4] = rSet.getString("Jam_Keberangkatan");
-                objt[5] = rSet.getString("Nopen");
-                objt[6] = rSet.getString("Nama_Penumpang");
-                objt[7] = rSet.getString("Waktu_Pemesanan");
+                objt[5] = rSet.getString("Nama_Penumpang");
+                objt[6] = rSet.getString("Waktu_Pemesanan");
                 
                 udtm.addRow(objt);
             }
