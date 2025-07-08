@@ -7,6 +7,7 @@ package airlinereservationapp;
 import Controller.MaskapaiController;
 import Model.User;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +19,7 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
-    private User user;
+    private final User user;
     
     public MainForm(User user) {
         initComponents();
@@ -32,11 +33,14 @@ public class MainForm extends javax.swing.JFrame {
 
     public void tampildata() {
         MaskapaiController mc = new MaskapaiController();
-        DefaultTableModel dtm = mc.createtable();
+        DefaultTableModel dtm = mc.maincreatetable();
+        DefaultTableModel udtm = mc.usercreatetable();
         
         this.tbl_pemesanan.setModel(dtm);
+        this.tbl_tiketsy.setModel(udtm);
         
         mc.tampilkanPenerbangan();
+        mc.tampilkanTiket(user.getUsername());
         
         Txt_Name.setText(user.getName());
         Txt_Uname.setText(user.getUsername());
@@ -543,6 +547,32 @@ public class MainForm extends javax.swing.JFrame {
 
     private void Btn_PesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_PesanActionPerformed
         // TODO add your handling code here:
+        int selectRow = tbl_pemesanan.getSelectedRow();
+        if (selectRow == -1) JOptionPane.showMessageDialog(this, "Tolong Pilih Penerbangan Terlebih Dahulu!");
+        
+        String IdmSelect = tbl_pemesanan.getValueAt(selectRow, 0).toString();
+        String MSelect = tbl_pemesanan.getValueAt(selectRow, 1).toString();
+        String TSelect = tbl_pemesanan.getValueAt(selectRow, 2).toString();
+        String TglSelect = tbl_pemesanan.getValueAt(selectRow, 3).toString();
+        String JamSelect = tbl_pemesanan.getValueAt(selectRow, 4).toString();
+        String NopenSelect = tbl_pemesanan.getValueAt(selectRow, 6).toString();
+        String Idm = IdmSelect;
+        String Maskapai = MSelect;
+        String Tujuan = TSelect;
+        String Tgl_Penerbangan = TglSelect;
+        String Jam_Penerbangan = JamSelect;
+        String Nopen = NopenSelect;
+        
+        MaskapaiController mc = new MaskapaiController();
+        DefaultTableModel udtm = mc.usercreatetable();
+        
+        mc.pesanTiket(Idm, Maskapai, Tujuan, Tgl_Penerbangan, Jam_Penerbangan, Nopen, user.getUsername(), user.getName());
+        
+        this.tbl_tiketsy.setModel(udtm);
+        
+        mc.tampilkanTiket(user.getUsername());
+        
+        JOptionPane.showMessageDialog(MainForm.this, "Tiket Berhasil Dipesan");
     }//GEN-LAST:event_Btn_PesanActionPerformed
 
     private void Txt_NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_NameActionPerformed
@@ -591,7 +621,7 @@ public class MainForm extends javax.swing.JFrame {
         
         try{
             MaskapaiController mc = new MaskapaiController();
-            DefaultTableModel dtm = mc.createtable();
+            DefaultTableModel dtm = mc.maincreatetable();
         
             this.tbl_pemesanan.setModel(dtm);
         
@@ -604,6 +634,10 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        MainForm.this.dispose();
+        
+        LoginForm LForm = new LoginForm();
+        LForm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Btn_ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ResetActionPerformed
@@ -613,7 +647,7 @@ public class MainForm extends javax.swing.JFrame {
         Tgl_Penerbangan.setDate(null);
         
         MaskapaiController mc = new MaskapaiController();
-        DefaultTableModel dtm = mc.createtable();
+        DefaultTableModel dtm = mc.maincreatetable();
         
         this.tbl_pemesanan.setModel(dtm);
         

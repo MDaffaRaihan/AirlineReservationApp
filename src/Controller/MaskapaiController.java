@@ -24,17 +24,35 @@ public class MaskapaiController {
                 return false;
             }
     };
+    DefaultTableModel udtm = new DefaultTableModel(){
+        @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex){
+                return false;
+            }
+    };
     
-    public DefaultTableModel createtable() {
-        //dtm.addColumn("No. Maskapai");
+    public DefaultTableModel maincreatetable() {
+        dtm.addColumn("No. Maskapai");
         dtm.addColumn("Nama Maskapai");
         dtm.addColumn("Tujuan");
         dtm.addColumn("Tgl Berangkat");
         dtm.addColumn("Jam Berangkat");
         dtm.addColumn("Harga");
-        //dtm.addColumn("No. Penerbangan");     
+        dtm.addColumn("No. Penerbangan");     
         
         return this.dtm;
+    }
+    public DefaultTableModel usercreatetable() {
+        udtm.addColumn("No. Maskapai");
+        udtm.addColumn("No. Penerbangan");     
+        udtm.addColumn("Nama Maskapai");
+        udtm.addColumn("Tujuan");
+        udtm.addColumn("Tgl Berangkat");
+        udtm.addColumn("Jam Berangkat");
+        udtm.addColumn("Nama");
+        udtm.addColumn("Waktu Pembelian");
+        
+        return this.udtm;
     }
     
     public void tampilkanPenerbangan() {
@@ -52,15 +70,15 @@ public class MaskapaiController {
             
             //hasil query ditampilkan di dtm
             while(rSet.next()) {
-                Object[] obj = new Object[5];
+                Object[] obj = new Object[7];
                 //getString harus sesuai dengan kolom di db
-                //obj[0] = rSet.getString("Idm");
-                obj[0] = rSet.getString("Maskapai");
-                obj[1] = rSet.getString("Tujuan");
-                obj[2] = rSet.getString("Tgl_Keberangkatan");
-                obj[3] = rSet.getString("Jam_Keberangkatan");
-                obj[4] = "Rp. "+rSet.getString("Harga");
-                //obj[6] = rSet.getString("Nopen");
+                obj[0] = rSet.getString("Idm");
+                obj[1] = rSet.getString("Maskapai");
+                obj[2] = rSet.getString("Tujuan");
+                obj[3] = rSet.getString("Tgl_Keberangkatan");
+                obj[4] = rSet.getString("Jam_Keberangkatan");
+                obj[5] = "Rp. "+rSet.getString("Harga");
+                obj[6] = rSet.getString("Nopen");
                 
                 dtm.addRow(obj);
             }
@@ -69,7 +87,7 @@ public class MaskapaiController {
         }
     }
     
-    public void cariTiket(String TPenerbangan, String MPenerbangan, String TglPenerbangan){
+    public void cariTiket(String TPenerbangan, String MPenerbangan, String TglPenerbangan) {
         try {
             Filter filt = new Filter();
             
@@ -85,15 +103,15 @@ public class MaskapaiController {
             ResultSet rSet = Data.executeQuery(query);
             
             while(rSet.next()) {
-                Object[] obj = new Object[5];
+                Object[] obj = new Object[7];
                 //getString harus sesuai dengan kolom di db
-                //obj[0] = rSet.getString("Idm");
-                obj[0] = rSet.getString("Maskapai");
-                obj[1] = rSet.getString("Tujuan");
-                obj[2] = rSet.getString("Tgl_Keberangkatan");
-                obj[3] = rSet.getString("Jam_Keberangkatan");
-                obj[4] = "Rp. "+rSet.getString("Harga");
-                //obj[6] = rSet.getString("Nopen");
+                obj[0] = rSet.getString("Idm");
+                obj[1] = rSet.getString("Maskapai");
+                obj[2] = rSet.getString("Tujuan");
+                obj[3] = rSet.getString("Tgl_Keberangkatan");
+                obj[4] = rSet.getString("Jam_Keberangkatan");
+                obj[5] = "Rp. "+rSet.getString("Harga");
+                obj[6] = rSet.getString("Nopen");
                 
                 dtm.addRow(obj);
             }
@@ -103,9 +121,58 @@ public class MaskapaiController {
         
     }
     
-    public void pesanTiket(String MPenerbangan, String TPenerbangan, String TglPenerbangan, String JamPenerbangan) {
+    public void pesanTiket(String Idm, String Maskapai, String Tujuan, String Tgl_Penerbangan, String Jam_Penerbangan, String Nopen, String User, String Namapen) {
+        Connector Conn = new Connector();
+        Statement Data = Conn.getStatement();
+        
+        try {
+            String query = (
+                    "INSERT INTO tiket (Idm, Maskapai, Tujuan, Tgl_Keberangkatan, Jam_Keberangkatan, Nopen, User, Nama_Penumpang) "
+                    + "VALUES ('" + Idm + "','" + Maskapai + "','" + Tujuan + "','" + Tgl_Penerbangan + "','" + Jam_Penerbangan + "','" + Nopen + "','"
+                    + User + "','" + Namapen + "')"
+            );
+            
+            //eksekusi
+            //untuk SELECT --> executeQuery
+            Data.executeUpdate(query);
+            
+        } catch (Exception e) {
+            System.out.println("Query Pesan Tiket Gagal!\n" + e);
+        }
         
     }
     
-    
+    public void tampilkanTiket(String User) {
+        try {
+            //Clear dtm/tabel sementaranya
+            udtm.getDataVector().removeAllElements();
+            udtm.fireTableDataChanged();
+            
+            //SQL Query
+            String query = "SELECT * FROM tiket WHERE User = '" + User + "'"
+                    + "ORDER BY Waktu_Pemesanan DESC";
+            
+            //eksekusi
+            //untuk SELECT --> executeQuery
+            ResultSet rSet = Data.executeQuery(query);
+            
+            //hasil query ditampilkan di dtm
+            while(rSet.next()) {
+                Object[] objt = new Object[8];
+                //getString harus sesuai dengan kolom di db
+                objt[0] = rSet.getString("Idm");
+                objt[1] = rSet.getString("Maskapai");
+                objt[2] = rSet.getString("Tujuan");
+                objt[3] = rSet.getString("Tgl_Keberangkatan");
+                objt[4] = rSet.getString("Jam_Keberangkatan");
+                objt[5] = rSet.getString("Nopen");
+                objt[6] = rSet.getString("Nama_Penumpang");
+                objt[7] = rSet.getString("Waktu_Pemesanan");
+                
+                udtm.addRow(objt);
+            }
+        } catch (Exception e) {
+            System.out.println("Query Gagal" +e);
+        }
+    }
 }
